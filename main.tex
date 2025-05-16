@@ -46,7 +46,7 @@
 % Custom theorem boxes
 % Box definitions with custom title argument
 \newtcolorbox{theoremBox}[1]{
-  colback=blue!5!white, colframe=blue!75!black,
+  colback=blue!5!white, colframe= gray!75!black,
   title={#1}, fonttitle=\bfseries, breakable
 }
 
@@ -64,7 +64,10 @@
   colback=purple!5!white, colframe=purple!80!black,
   title={#1}, fonttitle=\bfseries, breakable
 }
-
+\newtcolorbox{propositionBox}[1]{
+  colback=purple!5!white, colframe=purple!80!black,
+  title={#1}, fonttitle=\bfseries, breakable
+}
 \newtcolorbox{exampleBox}[1]{
   colback=gray!10!white, colframe=gray!60!black,
   title={#1}, fonttitle=\bfseries, breakable
@@ -119,4 +122,92 @@ More generally, if $T \subset A$ then we will define zero set of T to be common 
     \item Any single point: $(a_{1},...,a_{n}) = Z(x_{1} - a_{1},...,x_{n} - a_{n})$
     \item Linear subspaces of $\mathbf{A}^{n}$. We can always write any linear subspace as intersection of planes.
 \end{enumerate}
+\begin{propositionBox}{Proposition 1.3}
+    The union of two algebraic sets is an algebraic set. The intersection of any family of algebraic sets is an algebraic set. 
+\end{propositionBox}
+\textit{Sketch}: If $Y_{1} = Z(T_{1})$ and $Y_{2} = Z(T_{2})$, then $Y_{1} \cup Y_{2} = Z(T_{1}T_{2}).$ If $Y_{\alpha} = Z(T_{\alpha})$ is any family of algebraic sets, then $\cap Y_{\alpha} = Z(\cup T_{\alpha}).$\\\\  From the examples above, we know that the empty set and the whole space are both algebraic. So, using the above proposition, we have the following definition.
+\begin{definitionBox}{Definition 1.4}
+    \textit{Zariski Topology} on $\mathbf{A}^n$ is defined by taking open sets to be the complements of the algebraic sets.
+\end{definitionBox}\noindent
+\textbf{Example}. Let's consider the Zariski topology on the affine line $\mathbf{A}^1$. We know that $k[x]$ is PID, so any algebraic set is a zero set of a single polynomial. Since $k$ is algebraically closed, we can write any nonzero polynomial $f(x) = c(x - a_{1})\cdots (x - a_{n})$. Then Z(f) = $\{a_{1},...,a_{n}\}$. Thus, open sets are the empty set and the complements of finite subsets. In particular, this topology is not Hausdorff.
+\begin{definitionBox}{Definition 1.5}
+A nonempty subset Y of a topological space X is \textit{irreducible} if it cannot be expressed as the union Y = $Y_{1} \cup Y_{2}$ of two proper subsets, each one of which is \textbf{closed in Y}. The empty set is not considered to be irreducible.
+\end{definitionBox}\noindent
+\textbf{Examples:} \begin{enumerate}
+    \item $\mathbf{A}^1$.
+    \item Any nonempty open subset of an irreducible space is irreducible and dense.
+    \item If Y is an irreducible subset of X, then its closure $\Bar{Y}$ in X is also irreducible.
+\end{enumerate} 
+\begin{definitionBox}{Definition 1.6}
+An \textit{affine algebraic variety}( or simply \textit{affine variety})
+is an irreducible closed subset of $\mathbf{A}^n$ (with induced topology). An open subset of an affine variety is a quasi-affine variety.
+\end{definitionBox}\noindent
+Let's explore the relationship between subsets of $\mathbf{A}^n$ and ideals in A more deeply. For any subset $Y \subseteq \mathbf{A}^n$, let us define the ideal of Y in A by $$I(Y) = \{f \in A | f(P) = 0\;\; \text{for all P $\in$ Y}\}$$Now we have a function Z which maps subsets of A to algebraic sets, and a function I which maps subsets of $\mathbf{A}^n$ to ideals. Their properties are summarized in the follwoing proposition.
+\begin{propositionBox}{Proposition 1.7}
+\begin{enumerate}
+    \item If $T_{1} \subseteq T_{2}$ are subsets of A, then $Z(T_{1}) \supseteq Z(T_{2}).$
+    \item If $Y_{1} \subseteq Y_{2}$ are subsets of $\mathbf{A}^n$ , then $I(Y_{1}) \supseteq I(Y_{2}).$
+    \item For any two subsets $Y_{1}, Y_{2}$ of $\mathbf{A}^n$, we have $I(Y_{1} \cup Y_{2}) = I(Y_{1}) \cap I(Y_{2}).$
+    \item For any ideal $\mathfrak{a} \subseteq A$, $I(Z(\mathfrak{a})) = \sqrt{\mathfrak{a}}$, the radical of $\mathfrak{a}$.
+    \item For any subset $Y \subseteq \mathbf{A}^n$, $Z(I(Y)) = \Bar{Y}$, the closure of Y.
+\end{enumerate}
+\end{propositionBox}
+\textit{Sketch for part e}: Y $\subseteq$ Z(I(Y)) is a closed set, so clearly $\Bar{Y} \subseteq Z(I(Y)).$ As $\Bar{Y}$ is itself closed, so  $\Bar{Y} = Z(\mathfrak{a})$ for some ideal $\mathfrak{a}$. So, $Z(\mathfrak{a}) \supseteq Y$, and by (2), $I(Z(\mathfrak{a})) \subseteq I(Y).$ But certainly $\mathfrak{a} \subseteq I(Z(\mathfrak{a}))$, so by (1) we have $\Bar{Y} = Z(\mathfrak{a}) \subseteq Z(I(Y)).$\\
+\noindent Part (4) in the above proposition is not correct if field $k$ is not algebraically closed. For example , if $k = \mathbb{R}$, the curve $x^2 + y^2 + 1 = 0$ in $\mathbf{A}^2_{\mathbb{R}}$ has no points. 
+\begin{theoremBox}{Theorem 1.8}
+  (Hilbert's Nullstellensatz)  Let k be an algebraically closed field, let $\mathfrak{a}$ be an ideal in $A = k[x_{1},...,x_{n}]$, and let $f \in A$ be a polynomial which vanishes at all points of $Z(\mathfrak{a})$. Then $f^{r} \in \mathfrak{a}$ for some integer $r > 0$.
+\end{theoremBox}
+\begin{corollaryBox}{Corollary 1.9}
+    There is a one-to-one inclusion-reversing correspondence between sets in $\mathbf{A}^n$ and radical ideals in A, given by $Y \rightarrow I(Y)$ and $\mathfrak{a} \rightarrow Z(\mathfrak{a})$. Furthermore, an algebraic set is irreducible iff its ideal is a prime ideal.
+\end{corollaryBox}\noindent
+\textit{Sketch:} Let Y be an irreducible algebraic set and $fg \in I(Y)$, then $Y \subseteq Z(fg) = Z(f) \cup Z(g).$ Thus $Y = (Y \cap Z(g)) \cup (Y\cap Z(f))$.\\
+Now, let $\mathfrak{p}$ be a prime ideal and suppose that $Z(\mathfrak{p}) = Y_{1} \cup Y_{2}$.
+Then $\mathfrak{p} = I(Y_{1}) \cap I(Y_{2})$.\\
+\textbf{Examples}\begin{enumerate}
+    \item $\mathbf{A}^n$ is irreducible since it corresponds to the zero ideal in A, which is prime.
+    \item Since A = $k[x,y]$ is UFD, any irreducible $f \in A$ generates a prime ideal in A. So, the zero set $Y = Z(f)$ is irreducible. We call it \textit{affine curve } defined by the equation $f(x,y) = 0$. If f has degree d, we say that Y is a curve of \textit{degree d}.
+    \item More, generally, if $f$ is irreducible polynomial in $A = k[x_{1},...,x_{n}]$, we obtain an affine variety $Y = Z(f)$, which is called a \textit{surface }if n = 3, or a \textit{hypersurface }if $n >3$.
+    \item A maximal ideal of A corresponds to a minimal irreducible closed subset of $\mathbf{A}^n$, which must be a point. Which shows that every maximal ideal of A is of the form $(x_{1} - a_{1},...,x_{n} - a_{n}).$ This is also know as \textbf{Weak Nullstellensatz}.
+\end{enumerate}
+\begin{definitionBox}{Definition 1.10}
+    If $Y \subseteq \mathbf{A}^n$ is an algebraic set, we define the affine coordinate ring A(Y) of Y, to be A/I(Y).
+\end{definitionBox}
+\begin{remarkBox}
+ \   If Y is an affine variety, then A(Y) is an integral domain. Furthermore, A(Y) is a finitely generated k-algebra. Conversely, any finitely generated k-algebra B which is a domain is the affine coordinate ring of some affine variety.
+\end{remarkBox}
+\begin{definitionBox}{Definition 1.11}
+    A topological space is said to be \textbf{Noetherian} if it satisfies the \textit{descending chain condition} for closed sets i.e for any sequence $Y_{1} \supseteq Y_{2} ....$ of closed subsets, there exists an integer $r$ such that $Y_{r} = Y_{r+1} = ...$.
+\end{definitionBox}
+\textbf{Examples}: $\mathbf{A}^n$ is a Noetherian topological space. The fact that A is a Noetherian ring basically translates into the fact that $\mathbf{A}^n$ is a Noetherian topological space.
+\begin{remarkBox}
+\    Here are some of the properties of Noetherian topological space.:
+\begin{enumerate}
+    \item Any subset $Y \subseteq X$ of a Noetherian topological space is also Noetherian in the subspace topology.
+    \item Noetherian space which is also Hausdorff must be finite.
+    \item Noetherian spaces are quasi compact.
+\end{enumerate}
+\end{remarkBox}
+\begin{propositionBox}{Proposition 1.12}
+    In a noetherian topological space X, every nonempty closed subset Y can be expressed as a finite union $Y = Y_{1} \cup ... \cup Y_{r}$ of irreducible closed subsets $Y_{i}$. If we require the $Y_{i} \not\supset Y_{j}$  for $i \neq j$, then the $Y_{i}$ are uniquely determined. They are called the irreducible components of Y.\\
+     In particular, any algebraic set is a finite union of affine varieties in a unique way.
+\end{propositionBox}
+\textit{Sketch:} Let B be the set of all non-empty closed subsets of X which cannot be written as a finite union of irreducible closed subsets. \textbf{If B is nonempty, then since X is noetherian , it must contain a minimal element.} Claim that any minimal element can be written as finite union of closed irreducible subsets.\\
+To establish uniqueness, assume there exists an alternative such decomposition. The irreducibility of each $Y_{i}$ ensures that any nontrivial refinement or rearrangement must coincide with the original components up to permutation. Hence, the decomposition is unique up to ordering.
+\begin{definitionBox}{Definition 1.13}
+    If X is a topological space, we define the \textit{dimension} of X to be supremum of all integers n such that there exists a chain $Z_{0} \subset Z_{1} \subset ... \subset Z_{n}$ of distinct irreducible closed subsets of X. Dimension of affine variety or quasi-affine variety is also defined as a topological space.
+\end{definitionBox}
+\textbf{Examples} 1. The dimension of $\mathbf{A}^1$ is 1. It is very easy to see that the only irreducible closed subsets of $\mathbf{A}^1$ are the whole space and single points.\\
+2. $X \subset \mathbf{A}^3$ be the union of the three coordinate axes. Then dim X is 1. This is because only irreducible sets are points and any coordinate axis.\\
+\begin{definitionBox}{Definition 1.14}
+    In a ring A, the \textit{height} of a prime ideal $\mathfrak{p}$ is the supremum of all integers n such that there exists a chain $\mathfrak{p}_{0} \subset \mathfrak{p}_{1} \subset ... \subset \mathfrak{p}_{n} = \mathfrak{p}$ of distinct prime ideals. We define the dimension (\textit{Krull dimension}) of A to be supremum of the heights of all prime ideals.
+\end{definitionBox}
+\begin{propositionBox}{Proposition 1.15}
+    If Y is an affine algebraic set, then the dimension of Y is equal to the dimension of its affine coordinate ring A(Y).
+\end{propositionBox}
+\textit{Sketch:} Any affine algebraic set Y is closed. This implies any irreducible closed subset of Y is also closed in affine space. Now, we also know that any prime ideal containing I(Y) will go to a prime ideal in A(Y). After this, just use the definition of dimension. \\
+
+\begin{exampleBox}{Question 1}
+\textit{The Twisted Cubic curve: }Let \( Y \subseteq \mathbb{A}^3 \) be the set \( Y = \{ (t, t^2, t^3) \mid t \in k \} \). Show that \( Y \) is an affine variety of dimension 1. Find generators for the ideal \( I(Y) \). Show that \( A(Y) \) is isomorphic to a polynomial ring in one variable over \( k \). We say that \( Y \) is given by the \textit{parametric representation} \( x = t,\; y = t^2,\; z = t^3 \).
+\end{exampleBox}
+\textit{Answer}: Consider the polynomials $x^2 -y, x^3 -z$, then it is very easy to see that $I(Y) = (x^2 - y, x^3 - z)$ and A(Y) = $k[x,y,z]/I(Y) \cong k[t,t^2,t^3] \cong k[t]$. Now as k[t] is an integral domain, it implies that I(Y) is a prime ideal. This in fact implies that Y is an affine variety. Since $k[x]$ is a PID, the dimension of A(Y) is 1.
 \end{document}
